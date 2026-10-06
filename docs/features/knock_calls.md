@@ -113,5 +113,5 @@ CallsStatus: loading, ready, failed
   The phone does not vibrate for a background call beyond the notification.
 - The call is a helpyy screen, not the system call UI.
 - iOS cannot ring with the user's own ringtone, only bundled ones.
-- Character art is not in yet. IllustrationSlot shows the app logo
-  (AppMonogram, assets/images/logo_monogram.svg) in its place.
+- Character art is not in yet. IllustrationSlot only shows the handwritten
+  caption until it is.

@@ -7,7 +7,7 @@ import '../../form_status.dart';
 import '../../log_in/view/log_in_page.dart';
 import '../../data/auth_exception.dart';
 import '../../widgets/auth_error_banner.dart';
-import '../../widgets/auth_heading.dart';
+import '../../../widgets/screen_heading.dart';
 import '../../validation.dart';
 import '../../widgets/labeled_field.dart';
 import '../../widgets/password_field.dart';
@@ -81,7 +81,7 @@ class _SignUpViewState extends State<_SignUpView> {
               children: [
                 TopBar(onBack: navigator.canPop() ? navigator.pop : null),
                 const SizedBox(height: 16),
-                const AuthHeading(
+                const ScreenHeading(
                   eyebrow: 'Make it yours',
                   title: "Let's get you started.",
                 ),

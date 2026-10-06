@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:helpyy/auth/log_in/view/log_in_page.dart';
 import 'package:helpyy/auth/sign_up/view/sign_up_page.dart';
 import 'package:helpyy/widgets/app_logo.dart';
-import 'package:helpyy/widgets/app_monogram.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/mocks.dart';
@@ -20,7 +19,7 @@ void main() {
 
     expect(find.text('Need an easy way out?'), findsOneWidget);
     expect(find.byType(AppLogo), findsOneWidget);
-    expect(find.byType(AppMonogram), findsWidgets);
+    expect(find.text("we've all been there"), findsOneWidget);
     await tester.tap(find.text('Show me how'));
     await tester.pumpAndSettle();
     expect(find.text('Tap the back of your phone.'), findsOneWidget);

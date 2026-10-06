@@ -72,7 +72,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/ringtones/
-    - assets/images/
 
   fonts:
     - family: DMSans
