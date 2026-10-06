@@ -117,6 +117,34 @@ class LocalAuthRepository implements AuthRepository {
     return updated;
   }
 
+  /// There is no email on the device, so nothing is sent. Kept so the flow
+  /// can be exercised without a backend.
+  @override
+  Future<void> sendPasswordReset(String email) async {}
+
+  /// A reset only starts from an emailed link, which never happens here.
+  @override
+  bool get isResettingPassword => false;
+
+  @override
+  Stream<void> get passwordResets => const Stream.empty();
+
+  @override
+  Future<AppUser> setNewPassword(String password) async {
+    final user = await _signedInUser();
+    await _write([
+      for (final account in _accounts())
+        account.user.id == user.id
+            ? _Account(
+                user: user,
+                salt: account.salt,
+                hash: _hash(account.salt, password),
+              )
+            : account,
+    ]);
+    return user;
+  }
+
   Future<AppUser> _signedInUser() async {
     final user = await currentUser();
     if (user == null) throw const AuthException(AuthFailure.unavailable);

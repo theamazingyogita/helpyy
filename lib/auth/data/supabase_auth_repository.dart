@@ -15,7 +15,7 @@ class SupabaseAuthRepository implements AuthRepository {
     _client.auth.onAuthStateChange.listen(_onAuthChange);
   }
 
-  /// Where the confirmation link in the sign up email leads. It opens helpyy
+  /// Where the links in the sign up and password reset emails lead. It opens helpyy
   /// (see CFBundleURLTypes and the Android intent filter), and
   /// supabase_flutter signs the user in from it. It has to be listed under
   /// Redirect URLs in the Supabase dashboard.
@@ -25,6 +25,8 @@ class SupabaseAuthRepository implements AuthRepository {
 
   final supabase.SupabaseClient _client;
   final _changes = StreamController<AppUser?>.broadcast();
+  final _passwordResets = StreamController<void>.broadcast();
+  var _isResettingPassword = false;
 
   @override
   Stream<AppUser?> get changes => _changes.stream;
@@ -74,7 +76,10 @@ class SupabaseAuthRepository implements AuthRepository {
 
   /// The signed out event from Supabase updates [changes].
   @override
-  Future<void> logOut() => _client.auth.signOut();
+  Future<void> logOut() {
+    _isResettingPassword = false;
+    return _client.auth.signOut();
+  }
 
   @override
   Future<AppUser> updateName(String name) =>
@@ -101,6 +106,33 @@ class SupabaseAuthRepository implements AuthRepository {
   @override
   Future<AppUser> useAvatar(String avatarUrl) =>
       _guard(() => _replacePhoto(avatarUrl));
+
+  @override
+  Future<void> sendPasswordReset(String email) => _guard(
+    () => _client.auth.resetPasswordForEmail(
+      email.trim().toLowerCase(),
+      redirectTo: emailRedirect,
+    ),
+  );
+
+  @override
+  bool get isResettingPassword => _isResettingPassword;
+
+  @override
+  Stream<void> get passwordResets => _passwordResets.stream;
+
+  @override
+  Future<AppUser> setNewPassword(String password) {
+    return _guard(() async {
+      final response = await _client.auth.updateUser(
+        supabase.UserAttributes(password: password),
+      );
+      final user = response.user;
+      if (user == null) throw const AuthException(AuthFailure.unavailable);
+      _isResettingPassword = false;
+      return _announce(await _load(user));
+    });
+  }
 
   Future<AppUser> _replacePhoto(String? photoUrl) async {
     final before = await _load(_signedInUser());
@@ -149,6 +181,11 @@ class SupabaseAuthRepository implements AuthRepository {
     switch (change.event) {
       case supabase.AuthChangeEvent.signedOut:
         _changes.add(null);
+      // A reset link opens a session meant only for choosing a password, so
+      // the user is not announced as signed in until they have.
+      case supabase.AuthChangeEvent.passwordRecovery:
+        _isResettingPassword = true;
+        _passwordResets.add(null);
       case supabase.AuthChangeEvent.signedIn:
         final user = change.session?.user;
         if (user == null) return;
@@ -199,6 +236,9 @@ class SupabaseAuthRepository implements AuthRepository {
     'user_already_exists' || 'email_exists' => AuthFailure.emailTaken,
     'invalid_credentials' => AuthFailure.badCredentials,
     'email_not_confirmed' => AuthFailure.confirmEmail,
+    'weak_password' => AuthFailure.weakPassword,
+    'same_password' => AuthFailure.samePassword,
+    'over_email_send_rate_limit' => AuthFailure.tooManyEmails,
     _ => AuthFailure.unavailable,
   };
 }

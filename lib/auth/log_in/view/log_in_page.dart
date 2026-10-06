@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/ink_button.dart';
+import '../../../widgets/text_link.dart';
 import '../../../widgets/top_bar.dart';
 import '../../form_status.dart';
+import '../../forgot_password/view/forgot_password_page.dart';
 import '../../sign_up/view/sign_up_page.dart';
 import '../../data/auth_exception.dart';
 import '../../widgets/auth_error_banner.dart';
-import '../../widgets/auth_heading.dart';
+import '../../../widgets/screen_heading.dart';
 import '../../validation.dart';
 import '../../widgets/labeled_field.dart';
 import '../../widgets/password_field.dart';
@@ -75,7 +77,7 @@ class _LogInViewState extends State<_LogInView> {
               children: [
                 TopBar(onBack: navigator.canPop() ? navigator.pop : null),
                 const SizedBox(height: 16),
-                const AuthHeading(
+                const ScreenHeading(
                   eyebrow: 'Welcome back',
                   title: 'Good to see you again.',
                 ),
@@ -98,7 +100,15 @@ class _LogInViewState extends State<_LogInView> {
                   onChanged: (_) => _edited(),
                   onSubmitted: (_) => _submit(),
                 ),
-                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextLink(
+                    label: 'Forgot password?',
+                    onPressed: () => navigator.push(
+                      ForgotPasswordPage.route(email: _email.text),
+                    ),
+                  ),
+                ),
                 AuthErrorBanner(
                   failure: state.failure,
                   actionLabel: state.failure == AuthFailure.noAccount

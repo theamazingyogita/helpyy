@@ -136,4 +136,37 @@ void main() {
       failsWith(AuthFailure.unavailable),
     );
   });
+
+  test('a reset email asks to come back through the app link', () async {
+    final server = FakeSupabase((_) => FakeSupabase.json({}));
+
+    await SupabaseAuthRepository(
+      server.client,
+    ).sendPasswordReset(' Alex@Example.com ');
+
+    final request = server.requests.single;
+    expect(request.url.path, '/auth/v1/recover');
+    expect(
+      request.url.queryParameters['redirect_to'],
+      SupabaseAuthRepository.emailRedirect,
+    );
+    expect((jsonDecode(request.body) as Map)['email'], 'alex@example.com');
+  });
+
+  test('sending too many reset emails is reported', () {
+    final server = FakeSupabase(
+      (_) => authError('over_email_send_rate_limit', status: 429),
+    );
+
+    expect(
+      SupabaseAuthRepository(server.client).sendPasswordReset('a@example.com'),
+      failsWith(AuthFailure.tooManyEmails),
+    );
+  });
+
+  test('no reset is in progress until a reset link is opened', () {
+    final auth = SupabaseAuthRepository(FakeSupabase((_) => null).client);
+
+    expect(auth.isResettingPassword, isFalse);
+  });
 }

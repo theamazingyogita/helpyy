@@ -17,6 +17,25 @@ for now, behind interfaces so a backend can replace it later.
 5. On log out or account change, pushed routes are cleared and ShellPage is
    rebuilt for the new user.
 
+## Forgot password
+Log in has a "Forgot password?" link to ForgotPasswordPage, which sends a
+reset email through AuthRepository.sendPasswordReset. It always says the
+email is on its way, so nobody can test which addresses have accounts.
+
+The link opens helpyy (com.helpyy.helpyy://login-callback). Supabase marks
+the session as a password recovery, SupabaseAuthRepository sets
+isResettingPassword and emits on passwordResets, and AuthBloc moves to
+AuthStatus.resettingPassword, which shows NewPasswordPage in place of
+everything else. Saving checks validateNewPassword, calls setNewPassword and
+signs in. Cancel logs out of the recovery session.
+
+## Emails
+supabase/templates holds the branded confirmation and reset emails, sent
+from theweirdyoyo@gmail.com through Gmail SMTP (supabase/config.toml). The
+Gmail app password is passed at push time, never stored. The Site URL and
+the allowed redirect are both the app link, so every email link opens the
+app.
+
 ## Input rules
 lib/auth/validation.dart holds the rules and the matching input formatters
 for every auth field. Names: 2 to 40 characters, letters in any script with

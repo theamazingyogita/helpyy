@@ -6,6 +6,7 @@ import '../background/background_listening.dart';
 import '../auth/data/app_user.dart';
 import '../auth/data/auth_repository.dart';
 import '../auth/log_in/view/log_in_page.dart';
+import '../auth/new_password/view/new_password_page.dart';
 import '../knock/back_tap_shortcuts.dart';
 import '../knock/knock_detector.dart';
 import '../onboarding/bloc/intro_bloc.dart';
@@ -95,6 +96,7 @@ class _TickleAppState extends State<TickleApp> {
                 // Keyed so a different account never reuses the previous
                 // account's screens and blocs.
                 AuthStatus.signedIn => ShellPage(key: ValueKey(auth.user?.id)),
+                AuthStatus.resettingPassword => const NewPasswordPage(),
                 AuthStatus.checking => const Scaffold(
                   body: Center(child: AppLogo(fontSize: 44)),
                 ),

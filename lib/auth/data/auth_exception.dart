@@ -6,6 +6,9 @@ enum AuthFailure {
   /// The backend does not say which of the two was wrong.
   badCredentials('That email and password do not match. Try again.'),
   confirmEmail('Check your email and tap the link to confirm, then log in.'),
+  weakPassword('That password is too easy to guess. Pick another.'),
+  samePassword('That is your current password. Pick a new one.'),
+  tooManyEmails('Too many emails sent. Wait a minute and try again.'),
   unavailable('Something went wrong. Try again.');
 
   const AuthFailure(this.message);

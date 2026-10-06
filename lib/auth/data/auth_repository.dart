@@ -36,4 +36,19 @@ abstract interface class AuthRepository {
   /// Sets the profile picture to a character from CartoonAvatar.urlFor.
   /// Throws [AuthException].
   Future<AppUser> useAvatar(String avatarUrl);
+
+  /// Emails a link for choosing a new password. Completes the same way
+  /// whether or not an account exists, so the email cannot be probed.
+  /// Throws [AuthException].
+  Future<void> sendPasswordReset(String email);
+
+  /// True while the user has opened a reset link and not yet picked a new
+  /// password. [passwordResets] emits when it turns true.
+  bool get isResettingPassword;
+
+  Stream<void> get passwordResets;
+
+  /// Saves the new password for the reset in progress and signs in.
+  /// Throws [AuthException].
+  Future<AppUser> setNewPassword(String password);
 }

@@ -20,11 +20,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onStarted(AuthStarted event, Emitter<AuthState> emit) async {
     try {
-      emit(_stateFor(await _repository.currentUser()));
+      final user = await _repository.currentUser();
+      emit(
+        _repository.isResettingPassword
+            ? const AuthState.resettingPassword()
+            : _stateFor(user),
+      );
     } on AuthException {
       emit(const AuthState.signedOut());
     }
-    await emit.forEach(_repository.changes, onData: _stateFor);
+    await Future.wait([
+      emit.forEach(_repository.changes, onData: _stateFor),
+      emit.forEach(
+        _repository.passwordResets,
+        onData: (_) => const AuthState.resettingPassword(),
+      ),
+    ]);
   }
 
   AuthState _stateFor(AppUser? user) =>

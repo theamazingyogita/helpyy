@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:helpyy/auth/forgot_password/view/forgot_password_page.dart';
 import 'package:helpyy/auth/log_in/view/log_in_page.dart';
 import 'package:helpyy/auth/widgets/auth_error_banner.dart';
 import 'package:helpyy/avatar/cartoon_avatar.dart';
@@ -177,5 +178,26 @@ void main() {
 
     expect(find.text('Maya'), findsNothing);
     expect(find.text('nothing yet'), findsOneWidget);
+  });
+
+  testWidgets('forgot password sends a link for the typed email', (
+    tester,
+  ) async {
+    await tester.pumpHelpyy(detector: detector, signedIn: false);
+    await fill(tester, 'Email address', 'alex@example.com');
+
+    await tester.tap(find.text('Forgot password?'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ForgotPasswordPage), findsOneWidget);
+    expect(find.text('alex@example.com'), findsOneWidget);
+
+    await tester.tap(find.text('Send reset link'));
+    await tester.pumpAndSettle();
+    expect(find.text('Help is on the way.'), findsOneWidget);
+    expect(find.textContaining('alex@example.com'), findsOneWidget);
+
+    await tester.tap(find.text('Back to log in'));
+    await tester.pumpAndSettle();
+    expect(find.byType(LogInPage), findsOneWidget);
   });
 }
