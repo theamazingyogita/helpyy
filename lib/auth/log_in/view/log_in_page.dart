@@ -8,6 +8,7 @@ import '../../form_status.dart';
 import '../../forgot_password/view/forgot_password_page.dart';
 import '../../sign_up/view/sign_up_page.dart';
 import '../../data/auth_exception.dart';
+import '../../data/demo_account_auth_repository.dart';
 import '../../widgets/auth_error_banner.dart';
 import '../../../widgets/screen_heading.dart';
 import '../../validation.dart';
@@ -54,6 +55,12 @@ class _LogInViewState extends State<_LogInView> {
     context.read<LogInBloc>().add(
       LogInSubmitted(email: _email.text, password: _password.text),
     );
+  }
+
+  void _useDemoAccount() {
+    _email.text = DemoAccountAuthRepository.email;
+    _password.text = DemoAccountAuthRepository.password;
+    _submit();
   }
 
   void _edited() => context.read<LogInBloc>().add(const LogInFieldsEdited());
@@ -128,6 +135,12 @@ class _LogInViewState extends State<_LogInView> {
                   question: 'New around here?',
                   action: 'Sign up',
                   onPressed: _goToSignUp,
+                ),
+                Center(
+                  child: TextLink(
+                    label: 'Use demo account',
+                    onPressed: _useDemoAccount,
+                  ),
                 ),
               ],
             ),

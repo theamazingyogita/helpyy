@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:helpyy/auth/data/demo_account_auth_repository.dart';
 import 'package:helpyy/auth/forgot_password/view/forgot_password_page.dart';
 import 'package:helpyy/auth/log_in/view/log_in_page.dart';
 import 'package:helpyy/auth/widgets/auth_error_banner.dart';
@@ -199,5 +200,21 @@ void main() {
     await tester.tap(find.text('Back to log in'));
     await tester.pumpAndSettle();
     expect(find.byType(LogInPage), findsOneWidget);
+  });
+
+  testWidgets('use demo account fills in the demo login', (tester) async {
+    await tester.pumpHelpyy(detector: detector, signedIn: false);
+
+    await tester.scrollUntilVisible(
+      find.text('Use demo account'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.ensureVisible(find.text('Use demo account'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Use demo account'));
+    await tester.pump();
+
+    expect(find.text(DemoAccountAuthRepository.email), findsOneWidget);
   });
 }

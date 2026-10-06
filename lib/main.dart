@@ -8,6 +8,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app/app_bloc_observer.dart';
 import 'app/supabase_config.dart';
 import 'app/tickle_app.dart';
+import 'auth/data/demo_account_auth_repository.dart';
+import 'auth/data/local_auth_repository.dart';
 import 'auth/data/supabase_auth_repository.dart';
 import 'knock/knock_detector.dart';
 import 'onboarding/data/intro_repository.dart';
@@ -28,9 +30,14 @@ Future<void> main() async {
   final client = supabase.client;
   runApp(
     TickleApp(
-      auth: SupabaseAuthRepository(client),
+      auth: DemoAccountAuthRepository(
+        backend: SupabaseAuthRepository(client),
+        demo: LocalAuthRepository(prefs),
+      ),
       intro: IntroRepository(prefs),
-      repositoriesFor: (user) => UserRepositories.supabase(client, prefs, user),
+      repositoriesFor: (user) => DemoAccountAuthRepository.isDemo(user)
+          ? UserRepositories.local(prefs, user)
+          : UserRepositories.supabase(client, prefs, user),
       detectorFor: (settings) =>
           KnockDetector(threshold: () => settings.sensitivity.threshold),
     ),
