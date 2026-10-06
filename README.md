@@ -2,14 +2,19 @@
 
 Fake a call. Make your exit. Leave the small talk on read.
 
-## Screens
+## The guide
 
-<table>
-  <tr><td align="center"><img src="docs/screenshots/onboarding.jpg" width="180" alt="Onboarding"><br><sub>Onboarding</sub></td><td align="center"><img src="docs/screenshots/log-in.jpg" width="180" alt="Log in"><br><sub>Log in</sub></td><td align="center"><img src="docs/screenshots/choose-caller.jpg" width="180" alt="Pick a caller"><br><sub>Pick a caller</sub></td><td align="center"><img src="docs/screenshots/listening.jpg" width="180" alt="Listening"><br><sub>Listening</sub></td></tr>
-  <tr><td align="center"><img src="docs/screenshots/countdown.jpg" width="180" alt="Act natural"><br><sub>Act natural</sub></td><td align="center"><img src="docs/screenshots/incoming-call.jpg" width="180" alt="Incoming call"><br><sub>Incoming call</sub></td><td align="center"><img src="docs/screenshots/avatars.jpg" width="180" alt="Avatars"><br><sub>Avatars</sub></td><td align="center"><img src="docs/screenshots/call-history.jpg" width="180" alt="Call history"><br><sub>Call history</sub></td></tr>
-</table>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-01.jpg" width="100%" alt="helpyy guide, page 1 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-02.jpg" width="100%" alt="helpyy guide, page 2 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-03.jpg" width="100%" alt="helpyy guide, page 3 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-04.jpg" width="100%" alt="helpyy guide, page 4 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-05.jpg" width="100%" alt="helpyy guide, page 5 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-06.jpg" width="100%" alt="helpyy guide, page 6 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-07.jpg" width="100%" alt="helpyy guide, page 7 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-08.jpg" width="100%" alt="helpyy guide, page 8 of 9"></a>
+<a href="docs/helpyy-guide.pdf"><img src="docs/guide/page-09.jpg" width="100%" alt="helpyy guide, page 9 of 9"></a>
 
-Every screen, in order, is in the [illustrated guide](docs/helpyy-guide.pdf).
+Tap any page to open the [PDF](docs/helpyy-guide.pdf). The setup commands are repeated as text below so they can be copied.
 
 ## Features
 
