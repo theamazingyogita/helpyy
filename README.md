@@ -1,6 +1,6 @@
 # helpyy
 
-Your easy way out of awkward situations. Save a secret signal, tap it on the back of your phone, and a realistic incoming call rings so you can step away.
+Fake a call. Make your exit. Leave the small talk on read.
 
 ## Features
 
