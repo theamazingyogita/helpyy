@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Confirm your email.</title>
+<!-- Apple Mail and iOS load these. Gmail and Outlook fall back to the
+     stacks in the styles below. -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Patrick+Hand&amp;display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background:#EEEAE3;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">One tap and your helpyy account is ready.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EEEAE3;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#FFFFFF;border:1.5px solid #141414;box-shadow:4px 4px 0 #141414;">
+        <tr>
+          <td style="padding:28px 28px 8px 28px;font-family:'Patrick Hand','Comic Sans MS','Chalkboard SE',cursive;font-size:36px;line-height:1;color:#141414;">
+            helpyy<span style="color:#D4A23E;font-size:56px;line-height:0;">.</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:20px 28px 0 28px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#5E5A53;">
+            Almost there
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:8px 28px 0 28px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:26px;font-weight:700;line-height:1.2;color:#141414;">
+            Confirm your email.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:12px 28px 0 28px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:#141414;">
+            Tap the button to confirm <strong>{{ .Email }}</strong> and finish setting up helpyy.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 28px 8px 28px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td align="center" style="background:#5567A3;border:1.5px solid #141414;">
+                  <a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;">Confirm my email</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:12px 28px 28px 28px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.5;color:#5E5A53;">
+            Open this email on the phone that has helpyy, and the button takes you straight back into the app.<br><br>
+            Didn't sign up for helpyy? You can ignore this email.
+          </td>
+        </tr>
+      </table>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
+        <tr>
+          <td style="padding:20px 8px;font-family:'Patrick Hand','Comic Sans MS','Chalkboard SE',cursive;font-size:18px;color:#5E5A53;text-align:center;">
+            your easy way out
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
