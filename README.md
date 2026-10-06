@@ -2,6 +2,15 @@
 
 Fake a call. Make your exit. Leave the small talk on read.
 
+## Screens
+
+<table>
+  <tr><td align="center"><img src="docs/screenshots/onboarding.jpg" width="180" alt="Onboarding"><br><sub>Onboarding</sub></td><td align="center"><img src="docs/screenshots/log-in.jpg" width="180" alt="Log in"><br><sub>Log in</sub></td><td align="center"><img src="docs/screenshots/choose-caller.jpg" width="180" alt="Pick a caller"><br><sub>Pick a caller</sub></td><td align="center"><img src="docs/screenshots/listening.jpg" width="180" alt="Listening"><br><sub>Listening</sub></td></tr>
+  <tr><td align="center"><img src="docs/screenshots/countdown.jpg" width="180" alt="Act natural"><br><sub>Act natural</sub></td><td align="center"><img src="docs/screenshots/incoming-call.jpg" width="180" alt="Incoming call"><br><sub>Incoming call</sub></td><td align="center"><img src="docs/screenshots/avatars.jpg" width="180" alt="Avatars"><br><sub>Avatars</sub></td><td align="center"><img src="docs/screenshots/call-history.jpg" width="180" alt="Call history"><br><sub>Call history</sub></td></tr>
+</table>
+
+Every screen, in order, is in the [illustrated guide](docs/helpyy-guide.pdf).
+
 ## Features
 
 - Signals made of a tap count or a custom knock rhythm, each with its own caller and delay
@@ -41,6 +50,10 @@ Requirements: Flutter 3.38 or newer, Node.js (for the Supabase CLI), and a real 
 
        flutter pub get
        flutter run
+
+## Demo account
+
+Tap **Use demo account** on the login screen, or log in with `demo@helpyy.app` and `helpyy123`. It skips Supabase entirely and keeps everything on the phone, so it works before the backend or email is set up.
 
 ## Checks
 
