@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// One choice in the trigger list, with extra controls shown when picked.
 class TriggerOption extends StatelessWidget {
   const TriggerOption({
     super.key,

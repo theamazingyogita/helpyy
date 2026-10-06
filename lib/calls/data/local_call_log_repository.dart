@@ -11,7 +11,6 @@ class LocalCallLogRepository implements CallLogRepository {
   LocalCallLogRepository(this._prefs, {required String userId})
     : _key = 'user:$userId:call_log';
 
-  // Old entries are of no use and local storage is not meant for big lists.
   static const maxEntries = 50;
 
   final SharedPreferences _prefs;

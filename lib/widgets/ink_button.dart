@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../app/app_colors.dart';
 import 'brand_text.dart';
 
-/// Square button with a hard offset shadow and a trailing arrow.
 class InkButton extends StatelessWidget {
   const InkButton({
     super.key,

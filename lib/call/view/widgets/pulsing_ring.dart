@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Rings that keep spreading out from behind [child], like the answer button
-/// of an incoming call. Still when the system asks for reduced motion.
 class PulsingRing extends StatefulWidget {
   const PulsingRing({super.key, required this.color, required this.child});
 
@@ -41,7 +39,6 @@ class _PulsingRingState extends State<PulsingRing>
       alignment: Alignment.center,
       clipBehavior: Clip.none,
       children: [
-        // Two rings half a beat apart, so one is always on its way out.
         for (final lag in const [0.0, 0.5])
           Positioned.fill(
             child: AnimatedBuilder(

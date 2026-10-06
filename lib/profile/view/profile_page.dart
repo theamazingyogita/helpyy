@@ -24,7 +24,6 @@ class ProfilePage extends StatelessWidget {
 
   final AppUser user;
 
-  /// Swappable for tests. Defaults to the platform picker.
   final ImagePicker? picker;
 
   @override
@@ -108,7 +107,6 @@ class _ProfileViewState extends State<_ProfileView> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<ProfileBloc>();
-    // Follow the live user so a saved name or photo shows straight away.
     final user =
         context.select((AuthBloc auth) => auth.state.user) ?? widget.user;
     return Scaffold(
@@ -147,7 +145,6 @@ class _ProfileViewState extends State<_ProfileView> {
                   controller: _email,
                   enabled: false,
                 ),
-                // Only offer saving once there is something to save.
                 ValueListenableBuilder(
                   valueListenable: _name,
                   builder: (context, name, _) => name.text.trim() == user.name

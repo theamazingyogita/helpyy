@@ -5,7 +5,6 @@ import '../../auth/bloc/auth_bloc.dart';
 import '../../widgets/initial_avatar.dart';
 import 'profile_page.dart';
 
-/// Avatar, name and email row that opens the profile. Used in Settings.
 class ProfileSummary extends StatelessWidget {
   const ProfileSummary({super.key});
 

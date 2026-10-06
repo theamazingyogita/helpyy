@@ -9,8 +9,6 @@ import '../../validation.dart';
 part 'new_password_event.dart';
 part 'new_password_state.dart';
 
-/// Picks a new password after a reset link. Saving signs the user in, which
-/// reaches the app through AuthRepository changes.
 class NewPasswordBloc extends Bloc<NewPasswordEvent, NewPasswordState> {
   NewPasswordBloc(this._repository) : super(const NewPasswordState()) {
     on<NewPasswordSubmitted>(_onSubmitted);

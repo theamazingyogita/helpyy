@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'brand_text.dart';
 
-/// The small uppercase label that sits above headings.
 class Eyebrow extends StatelessWidget {
   const Eyebrow(this.text, {super.key, this.color});
 

@@ -6,14 +6,6 @@ import '../motion_sensitivity.dart';
 import 'local_settings_repository.dart';
 import 'settings_repository.dart';
 
-/// Settings in the user_settings table, with a copy on the device.
-///
-/// The knock detector reads [sensitivity] on every sensor sample, so reads
-/// come from the device copy. Saves go to both, and [refresh] pulls the
-/// server's value into the copy, which brings it across to a new phone.
-///
-/// The ringtone stays on the device only. It is a system ringtone on Android
-/// and a bundled tone on iOS, so it means nothing on another phone.
 class SupabaseSettingsRepository implements SettingsRepository {
   SupabaseSettingsRepository(
     this._client,
@@ -40,8 +32,6 @@ class SupabaseSettingsRepository implements SettingsRepository {
   @override
   Future<void> saveRingtone(Ringtone value) => _cache.saveRingtone(value);
 
-  /// Throws [FormatException] when the server cannot be reached. The device
-  /// copy keeps working either way.
   Future<void> refresh() async {
     final row = await readRemote(
       () => _client

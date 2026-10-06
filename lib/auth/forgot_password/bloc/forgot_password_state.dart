@@ -12,7 +12,6 @@ class ForgotPasswordState extends Equatable {
   final FieldError? emailError;
   final AuthFailure? failure;
 
-  /// The address the link went to, once it is sent.
   final String? sentTo;
 
   @override

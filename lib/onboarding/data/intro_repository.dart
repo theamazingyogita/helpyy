@@ -2,8 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../storage/storage_write_exception.dart';
 
-// Whether this device has seen the intro. Device level, not per account,
-// so it never needs a backend.
 class IntroRepository {
   IntroRepository(this._prefs);
 
@@ -13,7 +11,6 @@ class IntroRepository {
 
   bool get hasSeenIntro => _prefs.getBool(_key) ?? false;
 
-  /// Throws [StorageWriteException].
   Future<void> markSeen() async {
     if (!await _prefs.setBool(_key, true)) {
       throw const StorageWriteException();

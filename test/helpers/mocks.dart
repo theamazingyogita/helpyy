@@ -20,7 +20,6 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockRingtonePlayer extends Mock implements RingtonePlayer {}
 
-/// A player that does nothing, for tests that do not care about sound.
 MockRingtonePlayer silentRingtonePlayer() {
   final player = MockRingtonePlayer();
   when(

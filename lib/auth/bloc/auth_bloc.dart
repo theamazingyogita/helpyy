@@ -8,8 +8,6 @@ import '../data/auth_repository.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-/// Who is signed in. Sign up, log in and profile edits go through
-/// [AuthRepository], and this bloc follows its changes.
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this._repository) : super(const AuthState.checking()) {
     on<AuthStarted>(_onStarted);

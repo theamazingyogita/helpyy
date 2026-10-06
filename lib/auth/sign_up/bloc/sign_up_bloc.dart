@@ -19,7 +19,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   final AuthRepository _repository;
 
-  /// On success the repository announces the new user and the app moves on.
   Future<void> _onSubmitted(
     SignUpSubmitted event,
     Emitter<SignUpState> emit,

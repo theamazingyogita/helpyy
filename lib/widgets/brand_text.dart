@@ -6,11 +6,6 @@ import 'app_logo.dart';
 final _brand = RegExp(r'helpyy(\.)?', caseSensitive: false);
 final _wordAfter = RegExp(r'[\s\w]');
 
-/// Builds [text] with every "helpyy" drawn like the logo: lowercase, in the
-/// handwriting face, with the yellow dot.
-///
-/// The dot is left off when other punctuation follows ("on helpyy?"), so
-/// sentences do not end up with two marks.
 TextSpan brandSpan(String text, {TextStyle? style, required Color dotColor}) {
   final base = style ?? const TextStyle();
   final logo = base.copyWith(
@@ -45,7 +40,6 @@ TextSpan brandSpan(String text, {TextStyle? style, required Color dotColor}) {
   return TextSpan(style: style, children: spans);
 }
 
-/// [Text] that draws the brand name like the logo. See [brandSpan].
 class BrandText extends StatelessWidget {
   const BrandText(this.text, {super.key, this.style, this.textAlign});
 

@@ -10,8 +10,6 @@ import '../../avatar/cartoon_avatar.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
-/// Edits to the signed in user. The new user reaches the app through
-/// AuthRepository changes, so this bloc only tracks progress and errors.
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._repository) : super(const ProfileState()) {
     on<ProfileNameSaved>(_onNameSaved);

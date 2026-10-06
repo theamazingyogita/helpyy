@@ -24,7 +24,6 @@ class NewSignalState extends Equatable {
   final List<int> rhythm;
   final RecordStatus recordStatus;
 
-  /// The chosen trigger would also set off a signal that is already saved.
   final bool clashes;
 
   final int delaySeconds;

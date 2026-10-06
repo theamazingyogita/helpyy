@@ -32,8 +32,6 @@ ThemeData buildAppTheme() {
     scaffoldBackgroundColor: _cream,
   ).textTheme;
 
-  // Headlines in the design are tight and heavy, labels are small caps with
-  // wide tracking.
   final textTheme = base.copyWith(
     displaySmall: base.displaySmall?.copyWith(
       fontWeight: FontWeight.w600,
@@ -72,8 +70,6 @@ ThemeData buildAppTheme() {
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      // The field lights up the moment it is tapped, before the keyboard has
-      // finished sliding in.
       fillColor: WidgetStateColor.resolveWith(
         (states) => states.contains(WidgetState.focused)
             ? Colors.white

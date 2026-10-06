@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Underlined text action, like "Skip" or "Cancel".
 class TextLink extends StatelessWidget {
   const TextLink({super.key, required this.label, required this.onPressed});
 

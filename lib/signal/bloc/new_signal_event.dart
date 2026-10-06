@@ -4,7 +4,6 @@ sealed class NewSignalEvent {
   const NewSignalEvent();
 }
 
-/// Load saved signals so clashes can be spotted.
 final class NewSignalStarted extends NewSignalEvent {
   const NewSignalStarted();
 }
@@ -29,7 +28,6 @@ final class TriggerConfirmed extends NewSignalEvent {
   const TriggerConfirmed();
 }
 
-/// Back from the caller step to the trigger step.
 final class CallerStepLeft extends NewSignalEvent {
   const CallerStepLeft();
 }

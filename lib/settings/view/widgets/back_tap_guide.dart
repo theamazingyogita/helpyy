@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/brand_text.dart';
 
-/// How to point iPhone Back Tap at helpyy, which is the only way a signal can
-/// work while helpyy is closed on iOS.
 class BackTapGuide extends StatelessWidget {
   const BackTapGuide({super.key});
 

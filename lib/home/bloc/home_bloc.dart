@@ -48,8 +48,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late final StreamSubscription<int> _backTaps;
   var _isEditing = false;
 
-  /// A Back Tap that came in before the signals were loaded, which happens
-  /// when the tap is what launched helpyy.
   int? _pendingBackTap;
 
   Future<void> _load(Emitter<HomeState> emit) async {
@@ -77,8 +75,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) {
     final isListening = event.isOn && state.patterns.isNotEmpty;
     emit(state.copyWith(status: HomeStatus.ready, isListening: isListening));
-    // Emitted after ready so every attempt shows the message, not just the
-    // first.
     if (event.isOn && !isListening) {
       emit(state.copyWith(status: HomeStatus.noSignals));
     }
@@ -148,8 +144,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _ringForBackTap(event.taps, emit);
   }
 
-  // Back Tap is a deliberate gesture, so it rings whether or not the
-  // listening switch is on.
   void _ringForBackTap(int taps, Emitter<HomeState> emit) {
     if (state.incomingCall != null || _isEditing) return;
     for (final pattern in state.patterns) {
@@ -162,7 +156,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(status: HomeStatus.noBackTapSignal));
   }
 
-  // Stop listening while the call is up, so knocks during it are ignored.
   void _ring(KnockPattern pattern, Emitter<HomeState> emit) {
     _stopListening();
     emit(state.copyWith(incomingCall: () => pattern));
@@ -181,8 +174,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _knocks = null;
   }
 
-  // Every path that changes listening or the call goes through here, so the
-  // background service and the call notification never drift from state.
   @override
   void onChange(Change<HomeState> change) {
     super.onChange(change);

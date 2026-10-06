@@ -13,15 +13,12 @@ class CallState extends Equatable {
 
   final CallPhase phase;
 
-  /// Seconds until the phone rings, while counting down.
   final int secondsLeft;
 
-  /// Talk time once answered.
   final Duration elapsed;
 
   final bool historyFailed;
 
-  /// Ended during the countdown, so there was never a call.
   final bool wasCancelled;
 
   @override

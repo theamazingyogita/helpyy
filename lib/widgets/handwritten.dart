@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
 
-/// Text in the Patrick Hand face, for notes and accents.
 class Handwritten extends StatelessWidget {
   const Handwritten(
     this.text, {
@@ -17,7 +16,6 @@ class Handwritten extends StatelessWidget {
   final double fontSize;
   final Color? color;
 
-  /// Rotation in radians. Notes in the design are slightly tilted.
   final double angle;
   final TextAlign? textAlign;
 

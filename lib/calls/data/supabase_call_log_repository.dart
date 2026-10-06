@@ -6,13 +6,10 @@ import '../../storage/supabase_calls.dart';
 import 'call_log_repository.dart';
 import 'call_record.dart';
 
-/// Call history in the call_records table, limited to the signed in user by
-/// row level security.
 class SupabaseCallLogRepository implements CallLogRepository {
   SupabaseCallLogRepository(this._client, {required String userId})
     : _userId = userId;
 
-  // The Calls tab only ever shows recent calls.
   static const maxEntries = 50;
 
   final SupabaseClient _client;
@@ -22,7 +19,6 @@ class SupabaseCallLogRepository implements CallLogRepository {
   @override
   Stream<List<CallRecord>> get changes => _changes.stream;
 
-  /// Also throws [FormatException] when the server cannot be reached.
   @override
   Future<List<CallRecord>> load() => readRemote(() async {
     final rows = await _client
@@ -54,8 +50,6 @@ class SupabaseCallLogRepository implements CallLogRepository {
     _changes.add(const []);
   }
 
-  // The write already succeeded, so a failed refresh only delays the Calls
-  // tab until its next load.
   Future<void> _announce() async {
     try {
       _changes.add(await load());
@@ -73,7 +67,6 @@ class SupabaseCallLogRepository implements CallLogRepository {
     }) {
       return CallRecord(
         callerName: callerName,
-        // Stored in UTC, shown in the phone's time zone.
         startedAt: DateTime.parse(startedAt).toLocal(),
         answered: answered,
         talkTime: Duration(seconds: talkSeconds),

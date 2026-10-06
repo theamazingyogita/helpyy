@@ -6,8 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../app/app_theme.dart';
 import '../avatar/cartoon_avatar.dart';
 
-/// Round avatar: the photo or picked character when there is one, otherwise
-/// the first letter of the name on mustard.
 class InitialAvatar extends StatelessWidget {
   const InitialAvatar({
     super.key,
@@ -70,7 +68,6 @@ class InitialAvatar extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.cover,
-        // A missing or broken file falls back to the initial.
         errorBuilder: (_, _, _) => initial,
       ),
     );

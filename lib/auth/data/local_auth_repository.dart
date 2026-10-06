@@ -11,7 +11,6 @@ import 'app_user.dart';
 import 'auth_exception.dart';
 import 'auth_repository.dart';
 
-/// Keeps accounts on this device until there is a backend.
 class LocalAuthRepository implements AuthRepository {
   LocalAuthRepository(
     this._prefs, {
@@ -117,12 +116,9 @@ class LocalAuthRepository implements AuthRepository {
     return updated;
   }
 
-  /// There is no email on the device, so nothing is sent. Kept so the flow
-  /// can be exercised without a backend.
   @override
   Future<void> sendPasswordReset(String email) async {}
 
-  /// A reset only starts from an emailed link, which never happens here.
   @override
   bool get isResettingPassword => false;
 
@@ -160,8 +156,6 @@ class LocalAuthRepository implements AuthRepository {
     return updated;
   }
 
-  // The picker hands back a temporary file the OS may clear, so keep a copy.
-  // A new name each time so the image cache never shows the old picture.
   Future<String> _keepPhoto(AppUser user, String localPath) async {
     final directory = await _photoDirectory();
     final stamp = DateTime.now().microsecondsSinceEpoch;
@@ -176,7 +170,6 @@ class LocalAuthRepository implements AuthRepository {
     final uri = Uri.parse(photoUrl);
     if (uri.scheme != 'file') return;
     final file = File.fromUri(uri);
-    // Leftover files only waste space, so a failed delete is not an error.
     file.delete().ignore();
   }
 

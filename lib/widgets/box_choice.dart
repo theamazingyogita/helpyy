@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A row of square options where one is picked, like "Now / 5s / 10s".
 class BoxChoice<T> extends StatelessWidget {
   const BoxChoice({
     super.key,

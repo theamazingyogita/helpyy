@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../widgets/text_link.dart';
 import '../../widgets/brand_text.dart';
 
-/// "Already on helpyy? Log in" style line at the bottom of auth screens.
 class SwitchAuthLink extends StatelessWidget {
   const SwitchAuthLink({
     super.key,

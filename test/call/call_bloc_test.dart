@@ -56,7 +56,7 @@ void main() {
   test('still rings and vibrates when the ringtone cannot play', () async {
     when(
       () => ringtones.play(any(), loop: any(named: 'loop')),
-    ).thenThrow(PlatformException(code: 'UNAVAILABLE'));
+    ).thenAnswer((_) async => throw PlatformException(code: 'UNAVAILABLE'));
     final bloc = build();
     await Future<void>.delayed(Duration.zero);
     expect(bloc.state.phase, CallPhase.ringing);

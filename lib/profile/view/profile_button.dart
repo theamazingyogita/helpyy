@@ -5,7 +5,6 @@ import '../../auth/bloc/auth_bloc.dart';
 import '../../widgets/initial_avatar.dart';
 import 'profile_page.dart';
 
-/// Round initial in the home header that opens the profile.
 class ProfileButton extends StatelessWidget {
   const ProfileButton({super.key});
 

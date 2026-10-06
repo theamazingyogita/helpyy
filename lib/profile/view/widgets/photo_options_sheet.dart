@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../../avatar/cartoon_avatar.dart';
 import '../../../widgets/initial_avatar.dart';
 
-/// What the user picked in the photo sheet.
 sealed class PhotoChoice {
   const PhotoChoice();
 }
@@ -25,7 +24,6 @@ final class RemovePhoto extends PhotoChoice {
   const RemovePhoto();
 }
 
-/// [currentSeed] marks the character in use, if the picture is one.
 Future<PhotoChoice?> showPhotoOptions(
   BuildContext context, {
   required bool hasPhoto,
@@ -34,12 +32,10 @@ Future<PhotoChoice?> showPhotoOptions(
   return showModalBottomSheet<PhotoChoice>(
     context: context,
     showDragHandle: true,
-    // Grows to fit its content instead of stopping at about half the screen.
     isScrollControlled: true,
     builder: (context) {
       final textTheme = Theme.of(context).textTheme;
       final error = Theme.of(context).colorScheme.error;
-      // Only scrolls on a screen too short to show it all.
       return SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -81,7 +77,6 @@ Future<PhotoChoice?> showPhotoOptions(
   );
 }
 
-/// Every character at once, four to a row.
 class _AvatarGrid extends StatelessWidget {
   const _AvatarGrid({required this.currentSeed});
 

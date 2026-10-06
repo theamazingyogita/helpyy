@@ -43,10 +43,6 @@ const _tabs = [
   ),
 ];
 
-/// Icon only bottom tabs that look native: a Cupertino tab bar on iOS and
-/// macOS, a Material navigation bar elsewhere. The selected tab uses the same
-/// blue as the listening card. Tab names stay as tooltips and screen reader
-/// labels.
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({
     super.key,

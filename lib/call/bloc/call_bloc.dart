@@ -61,7 +61,6 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   final RingtonePlayer _ringtones;
   final Ringtone? _ringtone;
 
-  /// Vibrates once.
   final Future<void> Function() _ring;
   final DateTime Function() _now;
   Timer? _ticker;
@@ -132,11 +131,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   }
 
   Future<void> _playRingtone() async {
-    try {
-      await _ringtones.play(_ringtone);
-    } on PlatformException {
-      // The phone still vibrates. A silent call is better than no call.
-    }
+    await _ringtones.play(_ringtone).onError<PlatformException>((_, _) {});
   }
 
   void _stopRinging() {
@@ -146,11 +141,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   }
 
   Future<void> _stopRingtone() async {
-    try {
-      await _ringtones.stop();
-    } on PlatformException {
-      // Nothing was playing.
-    }
+    await _ringtones.stop().onError<PlatformException>((_, _) {});
   }
 
   @override

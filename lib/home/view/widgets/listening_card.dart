@@ -66,7 +66,6 @@ class ListeningCard extends StatelessWidget {
             child: Row(
               spacing: 18,
               children: [
-                // Character art goes here once we have it.
                 Container(
                   width: 76,
                   height: 76,

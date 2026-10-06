@@ -24,8 +24,6 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     Emitter<LogInState> emit,
   ) async {
     final emailError = validateEmail(event.email);
-    // Only check presence here. Length rules may have changed since the
-    // account was made.
     final passwordError = event.password.isEmpty ? FieldError.required : null;
     if (emailError != null || passwordError != null) {
       emit(LogInState(emailError: emailError, passwordError: passwordError));

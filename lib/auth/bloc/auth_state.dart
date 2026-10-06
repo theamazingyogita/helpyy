@@ -1,14 +1,6 @@
 part of 'auth_bloc.dart';
 
-enum AuthStatus {
-  checking,
-  signedOut,
-  signedIn,
-
-  /// A password reset link was opened. Nothing else is shown until a new
-  /// password is saved or the reset is cancelled.
-  resettingPassword,
-}
+enum AuthStatus { checking, signedOut, signedIn, resettingPassword }
 
 class AuthState extends Equatable {
   const AuthState._(this.status, this.user);

@@ -7,7 +7,5 @@ enum MotionSensitivity {
 
   final String label;
 
-  /// How sharply acceleration in m/s² has to jump between two readings for a
-  /// tap. Lower picks up softer taps, and more accidental bumps.
   final double threshold;
 }

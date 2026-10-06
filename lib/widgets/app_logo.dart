@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
 
-/// How much bigger the yellow dot is than the letters.
 const dotScale = 1.6;
 
 class AppLogo extends StatelessWidget {

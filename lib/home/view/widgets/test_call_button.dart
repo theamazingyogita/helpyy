@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../app/app_colors.dart';
 
-/// Small mustard button that rings a signal's call right away, so the user
-/// can see exactly what will happen.
 class TestCallButton extends StatelessWidget {
   const TestCallButton({super.key, required this.onPressed});
 

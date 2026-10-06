@@ -4,7 +4,6 @@ sealed class SignUpEvent {
   const SignUpEvent();
 }
 
-/// The user typed again, so an old error no longer applies.
 final class SignUpFieldsEdited extends SignUpEvent {
   const SignUpFieldsEdited();
 }

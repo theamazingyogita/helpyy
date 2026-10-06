@@ -36,8 +36,6 @@ class LocalSettingsRepository implements SettingsRepository {
   Ringtone? get ringtone {
     final raw = _prefs.getString(_ringtoneKey);
     if (raw == null) return null;
-    // A broken value should not stop the call ringing, so it falls back to
-    // the default tone.
     try {
       if (jsonDecode(raw) case {
         'id': final String id,

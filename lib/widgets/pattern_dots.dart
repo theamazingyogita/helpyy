@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Draws a knock rhythm as dots spaced by the gaps between knocks.
 class PatternDots extends StatelessWidget {
   const PatternDots({super.key, required this.intervals});
 

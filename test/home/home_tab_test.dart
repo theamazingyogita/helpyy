@@ -71,7 +71,6 @@ void main() {
     await tester.tap(find.byType(Switch));
     await tester.pump();
     knocks.add([200, 300]);
-    // The ringing animation never settles, so wait out the route transition.
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
 

@@ -10,7 +10,6 @@ final class NewPasswordSubmitted extends NewPasswordEvent {
   final String password;
 }
 
-/// Ends the reset without a new password, back to log in.
 final class NewPasswordCancelled extends NewPasswordEvent {
   const NewPasswordCancelled();
 }

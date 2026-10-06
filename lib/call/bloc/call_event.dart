@@ -4,7 +4,6 @@ sealed class CallEvent {
   const CallEvent();
 }
 
-/// Cancel button during the countdown.
 final class CallCancelled extends CallEvent {
   const CallCancelled();
 }
@@ -13,7 +12,6 @@ final class CallAnswered extends CallEvent {
   const CallAnswered();
 }
 
-/// Decline while ringing, or End once answered.
 final class CallHungUp extends CallEvent {
   const CallHungUp();
 }

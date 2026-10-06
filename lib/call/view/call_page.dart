@@ -9,8 +9,6 @@ import '../bloc/call_bloc.dart';
 import 'widgets/countdown_view.dart';
 import 'widgets/phone_call_view.dart';
 
-/// Pops with true when the call was saved to history, false when saving
-/// failed, and null when it was cancelled before ringing.
 class CallPage extends StatelessWidget {
   const CallPage({super.key, required this.pattern});
 

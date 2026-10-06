@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helpyy/auth/validation.dart';
 
-/// Types [text] into an empty field through [formatters].
 String typed(List<TextInputFormatter> formatters, String text) {
   var value = TextEditingValue.empty;
   final next = TextEditingValue(

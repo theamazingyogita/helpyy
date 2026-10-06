@@ -12,12 +12,6 @@ import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 
-/**
- * Keeps helpyy's process, and so its Flutter engine and knock detector, alive
- * while the app is in the background. The knock detection itself stays in
- * Dart. The partial wake lock keeps the motion sensor delivering readings
- * with the screen off.
- */
 class ListeningService : Service() {
     private var wakeLock: PowerManager.WakeLock? = null
 
@@ -35,8 +29,6 @@ class ListeningService : Service() {
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "helpyy:listening")
                 .apply { acquire() }
         }
-        // If Android kills the process, Dart starts over with listening off,
-        // so coming back on our own would only show a misleading notification.
         return START_NOT_STICKY
     }
 

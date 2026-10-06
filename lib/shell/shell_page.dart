@@ -18,7 +18,6 @@ class _ShellPageState extends State<ShellPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Kept alive so Home keeps listening while another tab is open.
       body: IndexedStack(
         index: _tab,
         children: const [HomeTab(), CallsTab(), SettingsTab()],

@@ -36,13 +36,10 @@ void main() {
     'user': user,
   };
 
-  http.Response authError(String code, {int status = 400}) =>
-      // Older servers name the field error_code, newer ones code.
-      FakeSupabase.json({
-        'code': code,
-        'error_code': code,
-        'msg': code,
-      }, status: status);
+  http.Response authError(String code, {int status = 400}) => FakeSupabase.json(
+    {'code': code, 'error_code': code, 'msg': code},
+    status: status,
+  );
 
   Matcher failsWith(AuthFailure failure) => throwsA(
     isA<AuthException>().having((e) => e.failure, 'failure', failure),

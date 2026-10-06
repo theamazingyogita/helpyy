@@ -13,7 +13,6 @@ void main() {
 
   setUp(() => player = silentRingtonePlayer());
 
-  /// Opens settings scrolled down to [control].
   Future<void> openSettings(WidgetTester tester, String control) async {
     await tester.pumpHelpyy(detector: MockKnockDetector(), ringtones: player);
     final isApple = defaultTargetPlatform == TargetPlatform.iOS;
@@ -24,7 +23,6 @@ void main() {
     await tester.scrollUntilVisible(
       find.text(control),
       200,
-      // Tabs stay alive in an IndexedStack, and settings is the last one.
       scrollable: find.byType(Scrollable).last,
     );
   }

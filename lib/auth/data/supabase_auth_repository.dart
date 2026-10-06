@@ -8,17 +8,11 @@ import 'app_user.dart';
 import 'auth_exception.dart';
 import 'auth_repository.dart';
 
-/// Accounts in Supabase Auth, with the name and picture in the profiles
-/// table and photos in the avatars bucket. See supabase/migrations.
 class SupabaseAuthRepository implements AuthRepository {
   SupabaseAuthRepository(this._client) {
     _client.auth.onAuthStateChange.listen(_onAuthChange);
   }
 
-  /// Where the links in the sign up and password reset emails lead. It opens helpyy
-  /// (see CFBundleURLTypes and the Android intent filter), and
-  /// supabase_flutter signs the user in from it. It has to be listed under
-  /// Redirect URLs in the Supabase dashboard.
   static const emailRedirect = 'com.helpyy.helpyy://login-callback';
 
   static const _bucket = 'avatars';
@@ -52,8 +46,6 @@ class SupabaseAuthRepository implements AuthRepository {
         emailRedirectTo: emailRedirect,
       );
       final user = response.user;
-      // With email confirmation on there is no session until the link in
-      // the email is tapped.
       if (response.session == null || user == null) {
         throw const AuthException(AuthFailure.confirmEmail);
       }
@@ -74,7 +66,6 @@ class SupabaseAuthRepository implements AuthRepository {
     });
   }
 
-  /// The signed out event from Supabase updates [changes].
   @override
   Future<void> logOut() {
     _isResettingPassword = false;
@@ -90,7 +81,6 @@ class SupabaseAuthRepository implements AuthRepository {
     return _guard(() async {
       if (localPath == null) return _replacePhoto(null);
       final uid = _signedInId();
-      // A new name each time so no cache shows the old picture.
       final path = '$uid/${DateTime.now().microsecondsSinceEpoch}.jpg';
       await _client.storage
           .from(_bucket)
@@ -141,7 +131,6 @@ class SupabaseAuthRepository implements AuthRepository {
     return updated;
   }
 
-  // Leftover files only waste space, so a failed delete is not an error.
   Future<void> _deleteUploaded(String? photoUrl) async {
     final marker = '/$_bucket/';
     if (photoUrl == null || !photoUrl.contains(marker)) return;
@@ -175,14 +164,10 @@ class SupabaseAuthRepository implements AuthRepository {
     );
   }
 
-  // Sessions also start and end without a call from here: a tapped
-  // confirmation link signs in, an expired session signs out.
   Future<void> _onAuthChange(supabase.AuthState change) async {
     switch (change.event) {
       case supabase.AuthChangeEvent.signedOut:
         _changes.add(null);
-      // A reset link opens a session meant only for choosing a password, so
-      // the user is not announced as signed in until they have.
       case supabase.AuthChangeEvent.passwordRecovery:
         _isResettingPassword = true;
         _passwordResets.add(null);
@@ -192,8 +177,6 @@ class SupabaseAuthRepository implements AuthRepository {
         try {
           _announce(await _guard(() => _load(user)));
         } on AuthException {
-          // The profile could not load. The app opens signed in on its next
-          // start, when currentUser runs again.
           return;
         }
       default:
@@ -212,8 +195,6 @@ class SupabaseAuthRepository implements AuthRepository {
 
   String _signedInId() => _signedInUser().id;
 
-  /// Turns every Supabase and network failure into an [AuthException] the
-  /// screens already know how to show.
   Future<T> _guard<T>(Future<T> Function() action) async {
     try {
       return await action();

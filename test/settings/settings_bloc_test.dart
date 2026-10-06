@@ -81,7 +81,7 @@ void main() {
       'still saves the choice when the preview cannot play',
       setUp: () => when(
         () => player.play(any(), loop: any(named: 'loop')),
-      ).thenThrow(PlatformException(code: 'NOT_FOUND')),
+      ).thenAnswer((_) async => throw PlatformException(code: 'NOT_FOUND')),
       build: build,
       act: (bloc) => bloc.add(RingtoneChosen(chime)),
       expect: () => [

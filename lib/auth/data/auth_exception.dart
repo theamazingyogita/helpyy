@@ -3,7 +3,6 @@ enum AuthFailure {
   noAccount('There is no account with this email.'),
   wrongPassword('That password is not right. Check it and try again.'),
 
-  /// The backend does not say which of the two was wrong.
   badCredentials('That email and password do not match. Try again.'),
   confirmEmail('Check your email and tap the link to confirm, then log in.'),
   weakPassword('That password is too easy to guess. Pick another.'),

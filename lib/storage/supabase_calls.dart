@@ -5,9 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'storage_write_exception.dart';
 
-/// Runs a Supabase read and reports any failure the way the repository
-/// interfaces promise: as a [FormatException], which the screens show as
-/// "could not be read" with a retry.
 Future<T> readRemote<T>(Future<T> Function() read) async {
   try {
     return await read();
@@ -20,8 +17,6 @@ Future<T> readRemote<T>(Future<T> Function() read) async {
   }
 }
 
-/// Runs a Supabase write and reports any failure as a
-/// [StorageWriteException].
 Future<T> writeRemote<T>(Future<T> Function() write) async {
   try {
     return await write();

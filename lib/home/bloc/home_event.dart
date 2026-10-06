@@ -4,7 +4,6 @@ sealed class HomeEvent {
   const HomeEvent();
 }
 
-/// Load saved signals. Also used to retry after a failed load.
 final class HomeStarted extends HomeEvent {
   const HomeStarted();
 }
@@ -25,8 +24,6 @@ final class HomeCallEnded extends HomeEvent {
   const HomeCallEnded();
 }
 
-/// The new signal screen opened. It uses the sensor itself, and a rhythm
-/// being recorded would otherwise set off a call for a matching signal.
 final class HomeSignalEditingStarted extends HomeEvent {
   const HomeSignalEditingStarted();
 }
@@ -51,7 +48,6 @@ final class _HomeSensorFailed extends HomeEvent {
   const _HomeSensorFailed();
 }
 
-/// A Back Tap shortcut ran, see BackTapShortcuts.
 final class _HomeBackTapped extends HomeEvent {
   const _HomeBackTapped(this.taps);
 

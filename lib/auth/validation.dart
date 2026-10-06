@@ -19,20 +19,13 @@ const maxNameLength = 40;
 const maxEmailLength = 254;
 const minPasswordLength = 8;
 
-/// Supabase Auth hashes passwords with bcrypt, which ignores anything past
-/// 72 bytes.
 const maxPasswordLength = 72;
 
-// Letters in any script, joined by single runs of spaces, apostrophes,
-// hyphens or dots: "Anne-Marie", "O'Neil", "J. R. Smith", "José", "李雷".
 final _name = RegExp(
   r"^[\p{L}\p{M}]+(?:[ '’.-]+[\p{L}\p{M}]+)*\.?$",
   unicode: true,
 );
 
-// A practical address check, not the whole RFC: no dots at either end of
-// the local part or doubled, domain labels of up to 63 letters, digits or
-// inner hyphens, and a top level domain of letters.
 final _email = RegExp(
   r"^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
   r'@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$',
@@ -57,13 +50,10 @@ FieldError? validateEmail(String value) {
   if (email.isEmpty) return FieldError.required;
   if (email.length > maxEmailLength) return FieldError.tooLong;
   final at = email.lastIndexOf('@');
-  // The part before the @ is limited to 64 characters.
   if (at > 64 || !_email.hasMatch(email)) return FieldError.invalidEmail;
   return null;
 }
 
-/// For a new password. Log in only checks that one was typed, so accounts
-/// made under older rules can still get in.
 FieldError? validateNewPassword(String value) {
   if (value.isEmpty) return FieldError.required;
   if (value.length < minPasswordLength) return FieldError.tooShort;
@@ -74,8 +64,6 @@ FieldError? validateNewPassword(String value) {
   return null;
 }
 
-/// Keeps a name field to characters [validateName] accepts, without leading
-/// or doubled spaces.
 final nameInputFormatters = <TextInputFormatter>[
   FilteringTextInputFormatter.allow(
     RegExp(r"[\p{L}\p{M} '’.-]", unicode: true),
@@ -85,7 +73,6 @@ final nameInputFormatters = <TextInputFormatter>[
   LengthLimitingTextInputFormatter(maxNameLength),
 ];
 
-/// Email addresses never contain spaces.
 final emailInputFormatters = <TextInputFormatter>[
   FilteringTextInputFormatter.deny(RegExp(r'\s')),
   LengthLimitingTextInputFormatter(maxEmailLength),

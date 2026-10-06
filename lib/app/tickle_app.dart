@@ -67,8 +67,6 @@ class _TickleAppState extends State<TickleApp> {
           listenWhen: (previous, current) =>
               previous.status != current.status ||
               previous.user?.id != current.user?.id,
-          // Sign up, log in and profile are pushed on top of the root, so
-          // clear them when the session or the account changes.
           listener: (_, _) =>
               _navigator.currentState?.popUntil((route) => route.isFirst),
           child: MaterialApp(
@@ -76,8 +74,6 @@ class _TickleAppState extends State<TickleApp> {
             navigatorKey: _navigator,
             debugShowCheckedModeBanner: false,
             theme: buildAppTheme(),
-            // Above the navigator, so pushed screens like the call see the
-            // signed in user's repositories too.
             builder: (context, navigator) =>
                 BlocSelector<AuthBloc, AuthState, AppUser?>(
                   selector: (auth) => auth.user,
@@ -93,8 +89,6 @@ class _TickleAppState extends State<TickleApp> {
                 ),
             home: BlocBuilder<AuthBloc, AuthState>(
               builder: (context, auth) => switch (auth.status) {
-                // Keyed so a different account never reuses the previous
-                // account's screens and blocs.
                 AuthStatus.signedIn => ShellPage(key: ValueKey(auth.user?.id)),
                 AuthStatus.resettingPassword => const NewPasswordPage(),
                 AuthStatus.checking => const Scaffold(

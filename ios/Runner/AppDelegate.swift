@@ -22,11 +22,6 @@ import UIKit
   }
 }
 
-/// Backs lib/ringtone/ringtone_player.dart. iOS gives apps no access to the
-/// phone's ringtones, so this plays tones bundled as Flutter assets.
-///
-/// It keeps the default audio session, so the ring switch silences it the
-/// way it silences a real call, and the call still vibrates.
 class RingtoneChannel {
   private let registrar: FlutterPluginRegistrar
   private let channel: FlutterMethodChannel
@@ -75,9 +70,6 @@ class RingtoneChannel {
   }
 }
 
-/// Backs lib/knock/back_tap_shortcuts.dart. The shortcut intents below hand
-/// it a tap count, and it passes that on to Dart, holding it until Dart is
-/// listening when the tap is what launched helpyy.
 class BackTapChannel {
   static let shared = BackTapChannel()
 
@@ -105,7 +97,6 @@ class BackTapChannel {
       return
     }
     channel.invokeMethod("tapped", arguments: taps) { [weak self] reply in
-      // Nobody listens while signed out. Keep the tap for the next sign in.
       if reply is FlutterError || (reply as? NSObject) === FlutterMethodNotImplemented {
         self?.isDartListening = false
         self?.pending = taps
@@ -140,7 +131,6 @@ struct TripleTapCallIntent: AppIntent {
   }
 }
 
-/// Lists both intents in the Shortcuts app without the user building them.
 @available(iOS 16.0, *)
 struct HelpyyShortcuts: AppShortcutsProvider {
   static var appShortcuts: [AppShortcut] {

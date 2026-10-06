@@ -13,12 +13,10 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-/** Backs lib/ringtone/ringtone_player.dart. */
 class RingtoneChannel(
     private val context: Context,
     messenger: BinaryMessenger,
 ) : MethodChannel.MethodCallHandler {
-    /** Needed only to open the picker. Ringing works without it, in the background too. */
     var activity: Activity? = null
 
     private val channel = MethodChannel(messenger, "helpyy/ringtone")
@@ -43,8 +41,6 @@ class RingtoneChannel(
 
     private fun play(id: String?, loop: Boolean, result: MethodChannel.Result) {
         stop()
-        // A tone picked earlier can be deleted or moved since, so fall back to
-        // the phone's default rather than ringing silently.
         val uris = listOfNotNull(id?.let(Uri::parse), Settings.System.DEFAULT_RINGTONE_URI)
         for (uri in uris) {
             try {
@@ -105,7 +101,6 @@ class RingtoneChannel(
         }
     }
 
-    /** True when [requestCode] was the picker's, so the activity can skip it. */
     fun onPickerResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         if (requestCode != PICK_REQUEST) return false
         val result = pendingPick ?: return true

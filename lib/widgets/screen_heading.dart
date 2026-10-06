@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'eyebrow.dart';
 import 'brand_text.dart';
 
-/// Eyebrow label, big headline and optional body text, as used at the top of
-/// most screens.
 class ScreenHeading extends StatelessWidget {
   const ScreenHeading({
     super.key,

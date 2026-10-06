@@ -13,7 +13,6 @@ import '../bloc/forgot_password_bloc.dart';
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({super.key, this.email = ''});
 
-  /// [email] fills the field with what was typed on log in.
   static Route<void> route({String email = ''}) =>
       MaterialPageRoute(builder: (_) => ForgotPasswordPage(email: email));
 

@@ -1,17 +1,8 @@
--- helpyy: everything that used to live in SharedPreferences, per user.
---
--- Every table is private to its owner through row level security. New
--- tables are not exposed to the Data API by default (Supabase, April 2026),
--- so each one grants the authenticated role explicitly. anon gets nothing.
-
 create schema if not exists private;
-
--- Profiles -------------------------------------------------------------------
 
 create table public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   name text not null check (char_length(name) between 1 and 80),
-  -- An https URL in the avatars bucket, or avatar:<seed> for a character.
   photo_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -28,13 +19,9 @@ create policy "profiles: owner updates" on public.profiles
   using ((select auth.uid()) = id)
   with check ((select auth.uid()) = id);
 
--- Older projects grant everything on new tables by default. Start from
--- nothing and grant only what the app uses.
 revoke all on public.profiles from anon, authenticated;
 grant select, update (name, photo_url, updated_at) on public.profiles to authenticated;
 
--- Sign up passes the name in user metadata. It is only copied here as the
--- display name and never used for authorization.
 create function private.create_profile()
 returns trigger
 language plpgsql
@@ -57,17 +44,12 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function private.create_profile();
 
--- Signals --------------------------------------------------------------------
-
 create table public.knock_patterns (
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
-  -- Made by the app, unique per user.
   id text not null,
-  -- Order on the home screen.
   position bigint not null default (extract(epoch from clock_timestamp()) * 1000000)::bigint,
   caller_name text not null check (char_length(caller_name) between 1 and 80),
   knock_count smallint not null check (knock_count between 2 and 8),
-  -- Gaps between knocks in milliseconds, null for a plain tap count.
   rhythm integer[],
   delay_seconds smallint not null default 0 check (delay_seconds between 0 and 60),
   created_at timestamptz not null default now(),
@@ -96,9 +78,6 @@ create policy "knock_patterns: owner deletes" on public.knock_patterns
 revoke all on public.knock_patterns from anon, authenticated;
 grant select, insert, update, delete on public.knock_patterns to authenticated;
 
--- Replaces all of the caller's signals in one transaction, so a failure
--- halfway never leaves them with half a list. Runs as the caller, so the
--- policies above still apply.
 create function public.replace_knock_patterns(patterns jsonb)
 returns void
 language plpgsql
@@ -127,8 +106,6 @@ $$;
 revoke execute on function public.replace_knock_patterns(jsonb) from public, anon;
 grant execute on function public.replace_knock_patterns(jsonb) to authenticated;
 
--- Call history ---------------------------------------------------------------
-
 create table public.call_records (
   id bigint generated always as identity primary key,
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
@@ -138,7 +115,6 @@ create table public.call_records (
   talk_time_seconds integer not null default 0 check (talk_time_seconds >= 0)
 );
 
--- Serves both the newest first history query and the foreign key.
 create index call_records_user_started_idx on public.call_records (user_id, started_at desc);
 
 alter table public.call_records enable row level security;
@@ -157,11 +133,6 @@ create policy "call_records: owner deletes" on public.call_records
 
 revoke all on public.call_records from anon, authenticated;
 grant select, insert, delete on public.call_records to authenticated;
-
--- Settings -------------------------------------------------------------------
-
--- The ringtone is left out on purpose: it is a device ringtone on Android
--- and a bundled tone on iOS, so it stays on the phone.
 
 create table public.user_settings (
   user_id uuid primary key default auth.uid() references auth.users (id) on delete cascade,
@@ -188,10 +159,6 @@ create policy "user_settings: owner updates" on public.user_settings
 revoke all on public.user_settings from anon, authenticated;
 grant select, insert, update on public.user_settings to authenticated;
 
--- Profile photos ---------------------------------------------------------------
-
--- Public so a photo loads from its URL. Each file sits under its owner's id
--- with a fresh name per upload, so URLs cannot be guessed.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('avatars', 'avatars', true, 5242880, array['image/jpeg', 'image/png', 'image/heic']);
 

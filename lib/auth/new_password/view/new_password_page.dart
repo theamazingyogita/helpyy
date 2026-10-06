@@ -9,8 +9,6 @@ import '../../widgets/auth_error_banner.dart';
 import '../../widgets/password_field.dart';
 import '../bloc/new_password_bloc.dart';
 
-/// Shown in place of everything else after a password reset link opens the
-/// app.
 class NewPasswordPage extends StatelessWidget {
   const NewPasswordPage({super.key});
 

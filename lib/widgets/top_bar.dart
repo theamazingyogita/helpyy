@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Row of controls at the top of a screen.
-///
-/// Callers place it inside a [SafeArea] so it sits below the status bar and
-/// notch, and it never shares a row with the logo, so the two cannot overlap.
 class TopBar extends StatelessWidget {
   const TopBar({super.key, this.onBack, this.trailing});
 

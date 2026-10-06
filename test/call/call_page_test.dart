@@ -54,8 +54,6 @@ void main() {
       ),
     );
     await tester.tap(find.text('open'));
-    // Ringing animates forever, so wait out the route transition instead of
-    // settling.
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
     return log;

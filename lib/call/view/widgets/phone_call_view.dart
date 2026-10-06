@@ -49,15 +49,12 @@ class PhoneCallView extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // Each platform answers the way its own phone app does.
           if (isRinging && Theme.of(context).platform != TargetPlatform.iOS)
             SwipeToAnswer(
               onAnswered: () => bloc.add(const CallAnswered()),
               onDeclined: () => bloc.add(const CallHungUp()),
             )
           else
-            // Each button is centred in an equal share of the width, so the
-            // gaps match even though "Decline" is wider than "Answer".
             Row(
               children: [
                 Expanded(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../app/app_colors.dart';
 import '../../../widgets/initial_avatar.dart';
 
-/// Big avatar with a camera badge that opens the photo options.
 class EditableAvatar extends StatelessWidget {
   const EditableAvatar({
     super.key,

@@ -32,8 +32,6 @@ class AppUser extends Equatable {
   final String name;
   final String email;
 
-  /// A file:// URI while photos live on the device, an https URL once they
-  /// come from a backend.
   final String? photoUrl;
 
   AppUser copyWith({String? name, ValueGetter<String?>? photoUrl}) => AppUser(

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../widgets/text_link.dart';
 import '../data/auth_exception.dart';
 
-/// Boxed error under an auth form, with an optional way out such as
-/// "Sign up instead".
 class AuthErrorBanner extends StatelessWidget {
   const AuthErrorBanner({
     super.key,

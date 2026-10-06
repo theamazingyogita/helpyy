@@ -13,12 +13,10 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-/** Backs lib/background/background_listening.dart. */
 class BackgroundChannel(
     private val app: HelpyyApplication,
     messenger: BinaryMessenger,
 ) : MethodChannel.MethodCallHandler {
-    /** Needed to ask for notification permission and to undo show over lock screen. */
     var activity: MainActivity? = null
 
     private val notifications = app.getSystemService(NotificationManager::class.java)
@@ -51,9 +49,6 @@ class BackgroundChannel(
         }
     }
 
-    // Without it Android 13+ hides both the listening and the call
-    // notification. Listening and ringing still work, the call just cannot
-    // pop up over other apps.
     private fun askForNotifications() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
         val activity: Activity = activity ?: return
@@ -65,9 +60,6 @@ class BackgroundChannel(
         activity.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), PERMISSION_REQUEST)
     }
 
-    // Apps may not open an activity from the background, but a full screen
-    // notification may, which is what the system phone app does too. Where
-    // full screen is not allowed, Android shows it as a heads up instead.
     private fun showIncomingCall(callerName: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notifications.createNotificationChannel(

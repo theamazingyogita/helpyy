@@ -6,8 +6,6 @@ import '../../../widgets/box_choice.dart';
 import '../../../widgets/circle_icon.dart';
 import '../../bloc/settings_bloc.dart';
 
-/// iOS keeps the phone's ringtones away from apps, so it offers helpyy's own
-/// tones. Android hands off to the system picker.
 class RingtoneSetting extends StatelessWidget {
   const RingtoneSetting({super.key, required this.ringtone});
 

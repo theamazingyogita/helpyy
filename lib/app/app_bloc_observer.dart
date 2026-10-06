@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Logs every bloc event, state change and error to the `flutter run`
-/// console. Only installed in debug builds, see main.dart.
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
 

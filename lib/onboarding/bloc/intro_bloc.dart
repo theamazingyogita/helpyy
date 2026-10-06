@@ -5,7 +5,6 @@ import '../data/intro_repository.dart';
 
 part 'intro_event.dart';
 
-/// State is true while the intro should be shown.
 class IntroBloc extends Bloc<IntroEvent, bool> {
   IntroBloc(this._repository) : super(!_repository.hasSeenIntro) {
     on<IntroFinished>(_onFinished);
@@ -15,10 +14,6 @@ class IntroBloc extends Bloc<IntroEvent, bool> {
 
   Future<void> _onFinished(IntroFinished event, Emitter<bool> emit) async {
     emit(false);
-    try {
-      await _repository.markSeen();
-    } on StorageWriteException {
-      // Nothing for the user to do. They see the intro again next launch.
-    }
+    await _repository.markSeen().onError<StorageWriteException>((_, _) {});
   }
 }

@@ -35,8 +35,6 @@ class NewSignalBloc extends Bloc<NewSignalEvent, NewSignalState> {
     on<_RecorderSensorFailed>(_onSensorFailed);
   }
 
-  /// On iOS signals have to work through Back Tap, which only knows double
-  /// and triple taps, so custom rhythms and other counts are off.
   final bool isBackTapOnly;
 
   int get minTaps => isBackTapOnly ? 2 : KnockDetector.minKnocks;
@@ -55,7 +53,6 @@ class NewSignalBloc extends Bloc<NewSignalEvent, NewSignalState> {
     try {
       _saved = await _repository.load();
     } on FormatException {
-      // Corrupt storage is reported on the home screen.
       _saved = const [];
     }
     final clashes = _clashes(state);
@@ -134,7 +131,6 @@ class NewSignalBloc extends Bloc<NewSignalEvent, NewSignalState> {
   }
 
   void _onRhythmKnocked(_RhythmKnocked event, Emitter<NewSignalState> emit) {
-    // Keep the first rhythm until the user chooses to try again.
     if (state.recordStatus != RecordStatus.listening) return;
     _stopListening();
     _emitChecked(
@@ -151,7 +147,6 @@ class NewSignalBloc extends Bloc<NewSignalEvent, NewSignalState> {
     emit(state.copyWith(recordStatus: RecordStatus.sensorUnavailable));
   }
 
-  /// Emits [next] with its clash flag worked out against saved signals.
   void _emitChecked(NewSignalState next, Emitter<NewSignalState> emit) {
     emit(next.copyWith(clashes: _clashes(next)));
   }

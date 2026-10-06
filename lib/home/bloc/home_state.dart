@@ -7,10 +7,8 @@ enum HomeStatus {
   deleteFailed,
   sensorUnavailable,
 
-  /// The switch was turned on with no signal saved.
   noSignals,
 
-  /// A Back Tap came in that no tap count signal uses.
   noBackTapSignal,
 }
 
@@ -26,7 +24,6 @@ class HomeState extends Equatable {
   final List<KnockPattern> patterns;
   final bool isListening;
 
-  /// Set when a fake call should be shown, cleared once it ends.
   final KnockPattern? incomingCall;
 
   HomeState copyWith({

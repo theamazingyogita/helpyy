@@ -46,12 +46,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     RingtoneChosen event,
     Emitter<SettingsState> emit,
   ) async {
-    try {
-      await _player.play(event.ringtone, loop: false);
-    } on PlatformException {
-      // Only the preview is lost. The choice still saves and the call
-      // vibrates if the tone cannot play then either.
-    }
+    await _player
+        .play(event.ringtone, loop: false)
+        .onError<PlatformException>((_, _) {});
     await _save(event.ringtone, emit);
   }
 
@@ -81,11 +78,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   @override
   Future<void> close() async {
-    try {
-      await _player.stop();
-    } on PlatformException {
-      // Nothing was playing.
-    }
+    await _player.stop().onError<PlatformException>((_, _) {});
     return super.close();
   }
 }

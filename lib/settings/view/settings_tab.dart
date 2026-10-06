@@ -73,8 +73,6 @@ class SettingsTab extends StatelessWidget {
               const SizedBox(height: 8),
               const LogOutRow(),
               const SizedBox(height: 24),
-              // Shows every package licence, including the credit the
-              // Adventurer characters need.
               Center(
                 child: TextLink(
                   label: 'Licenses',

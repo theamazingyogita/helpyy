@@ -10,13 +10,11 @@ class SettingsState extends Equatable {
 
   final MotionSensitivity sensitivity;
 
-  /// Null rings the default tone.
   final Ringtone? ringtone;
 
   final bool saveFailed;
   final bool pickerFailed;
 
-  /// The failure flags only last for the state that reports them.
   SettingsState copyWith({
     MotionSensitivity? sensitivity,
     ValueGetter<Ringtone?>? ringtone,

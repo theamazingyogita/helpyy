@@ -12,10 +12,6 @@ import '../settings/data/local_settings_repository.dart';
 import '../settings/data/settings_repository.dart';
 import '../settings/data/supabase_settings_repository.dart';
 
-/// Everything that belongs to one signed in user.
-///
-/// The app uses [UserRepositories.supabase]. [UserRepositories.local] keeps
-/// it all on the device, which the tests use.
 class UserRepositories {
   const UserRepositories({
     required this.patterns,
@@ -41,8 +37,6 @@ class UserRepositories {
       LocalSettingsRepository(prefs, userId: user.id),
       userId: user.id,
     );
-    // Offline the device copy is used, so a failed refresh needs no
-    // handling here.
     settings.refresh().ignore();
     return UserRepositories(
       patterns: SupabasePatternRepository(client),

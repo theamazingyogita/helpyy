@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Colours the Material scheme has no slot for.
 class AppColors extends ThemeExtension<AppColors> {
   const AppColors({
     required this.ink,

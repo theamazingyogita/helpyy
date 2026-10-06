@@ -9,7 +9,6 @@ final _start = DateTime(2026);
 UserAccelerometerEvent _reading(int ms, {double x = 0, double z = 0}) =>
     UserAccelerometerEvent(x, 0, z, _start.add(Duration(milliseconds: ms)));
 
-// Samples every 20ms like the real sensor, with a knock at each given time.
 List<UserAccelerometerEvent> _session(List<int> knocksAt, {int until = 4000}) {
   return [
     for (var ms = 0; ms <= until; ms += 20)
@@ -80,8 +79,6 @@ void main() {
   });
 
   test('ignores movement that builds up smoothly, however strong', () async {
-    // Swinging the phone: z climbs to 8 and back over a second, 0.16 per
-    // reading, three times.
     final events = [
       for (var ms = 0; ms <= 4000; ms += 20)
         _reading(ms, z: 8 * (1 - ((ms % 1000) - 500).abs() / 500)),

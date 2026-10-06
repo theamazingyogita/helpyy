@@ -6,10 +6,6 @@ import '../knock/knock_detector.dart';
 import '../settings/data/settings_repository.dart';
 import 'user_repositories.dart';
 
-/// Provides the signed in user's repositories to everything below it.
-///
-/// Give it a key from the user id so switching accounts builds fresh
-/// repositories and never shows one user's data to another.
 class SignedInScope extends StatefulWidget {
   const SignedInScope({
     super.key,

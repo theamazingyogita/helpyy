@@ -5,8 +5,6 @@ import 'package:flutter/semantics.dart';
 
 import '../../../app/app_colors.dart';
 
-/// Android's incoming call control: drag the button up to answer or down to
-/// decline. While idle it hops and wiggles to show it can be dragged.
 class SwipeToAnswer extends StatefulWidget {
   const SwipeToAnswer({
     super.key,
@@ -27,8 +25,6 @@ class _SwipeToAnswerState extends State<SwipeToAnswer>
   static const _commitAt = 80.0;
   static const _buttonSize = 76.0;
 
-  // Room for the idle hop. A drag paints over the labels and arrows, which
-  // fade out of its way, so the control stays short enough for small phones.
   static const _buttonSlot = _buttonSize + 24;
 
   late final _hint = AnimationController(
@@ -36,7 +32,6 @@ class _SwipeToAnswerState extends State<SwipeToAnswer>
     duration: const Duration(milliseconds: 1800),
   );
 
-  // Up is negative, the way Flutter's y axis runs.
   late final _offset = AnimationController.unbounded(vsync: this);
 
   var _isDone = false;
@@ -92,7 +87,6 @@ class _SwipeToAnswerState extends State<SwipeToAnswer>
     action();
   }
 
-  // A short hop at the start of each beat, then a rest.
   double _hintLift(double t) {
     if (t > 0.35) return 0;
     return -math.sin(t / 0.35 * math.pi) * 16;
@@ -156,7 +150,6 @@ class _SwipeToAnswerState extends State<SwipeToAnswer>
                           ),
                         ),
                         child: Transform.rotate(
-                          // Turns into the hang up handset on the way down.
                           angle: idle
                               ? _hintWiggle(_hint.value)
                               : towardsDecline * math.pi * 0.75,
@@ -183,7 +176,6 @@ class _SwipeToAnswerState extends State<SwipeToAnswer>
   }
 }
 
-/// Three arrows above the button that light up bottom to top.
 class _Chevrons extends StatelessWidget {
   const _Chevrons({
     required this.progress,

@@ -9,7 +9,6 @@ import io.flutter.embedding.android.FlutterActivity
 class MainActivity : FlutterActivity() {
     private val app get() = application as HelpyyApplication
 
-    // The engine lives in HelpyyApplication, so it outlives this activity.
     override fun getCachedEngineId() = HelpyyApplication.ENGINE_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +46,6 @@ class MainActivity : FlutterActivity() {
         super.onDestroy()
     }
 
-    /** Lets the fake call show and wake the screen on a locked phone, like a real one. */
     fun showOverLockScreen(show: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(show)

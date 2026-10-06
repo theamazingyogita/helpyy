@@ -10,7 +10,6 @@ final class ProfileNameSaved extends ProfileEvent {
   final String name;
 }
 
-/// A picture was taken or picked. [path] is the file the picker returned.
 final class ProfilePhotoChosen extends ProfileEvent {
   const ProfilePhotoChosen(this.path);
 
@@ -21,7 +20,6 @@ final class ProfilePhotoRemoved extends ProfileEvent {
   const ProfilePhotoRemoved();
 }
 
-/// A ready made character was picked instead of a photo.
 final class ProfileAvatarChosen extends ProfileEvent {
   const ProfileAvatarChosen(this.seed);
 

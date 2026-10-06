@@ -21,14 +21,11 @@ class PumpedApp {
 
   final LocalAuthRepository auth;
 
-  /// Null when the app was started signed out.
   final AppUser? user;
   final UserRepositories? data;
 }
 
 extension PumpApp on WidgetTester {
-  /// Starts the real app on local storage. By default a user is signed in
-  /// with [patterns] saved.
   Future<PumpedApp> pumpHelpyy({
     required KnockDetector detector,
     List<KnockPattern> patterns = const [],

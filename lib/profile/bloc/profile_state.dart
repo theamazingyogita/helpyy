@@ -10,7 +10,6 @@ class ProfileState extends Equatable {
   final FormStatus status;
   final FieldError? nameError;
 
-  /// True right after a successful save, so the page can confirm it.
   final bool isSaved;
 
   @override
